@@ -1,7 +1,5 @@
 # ![app icon](./.github/readme-images/app-icon.png) nCalc
 
-Tachiyomi is a free and open source manga reader for Android 6.0 and above.
-
 ![sample screenshot](./.github/readme-images/screenshot.jpg)
 
 My very first Android app that I can consider complete. It's a simple calculator app with additional features otakus might like, like the doujin code vault and able to set calculator background. We may wanna calculate how many waifus we already had. 😂
