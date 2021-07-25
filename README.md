@@ -1,5 +1,7 @@
 # ![app icon](./.github/readme-images/app-icon.png) nCalc
 
+A calculator for otakus where you can hide your nuke codes collection to protect the world.
+
 ![sample screenshot](./.github/readme-images/screenshot.jpg)
 
 My very first Android app that I can consider complete. It's a simple calculator app with additional features otakus might like, like the doujin code vault and able to set calculator background. We may wanna calculate how many waifus we already had. 😂
