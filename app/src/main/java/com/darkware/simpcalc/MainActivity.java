@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(
                     getApplicationContext(),
                     "Copied to clipboard",
-                    5
+                    Toast.LENGTH_LONG
                 ).show();
 
                 return false;
@@ -299,7 +300,7 @@ public class MainActivity extends AppCompatActivity {
                         temp.set(0, temp.get(0).multiply(temp.get(i+1)));
                         break;
                     case "÷":
-                        temp.set(0, temp.get(0).divide(temp.get(i+1)));
+                        temp.set(0, temp.get(0).divide(temp.get(i+1), MathContext.DECIMAL64));
                         break;
                 }
             }
