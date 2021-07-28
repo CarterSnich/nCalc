@@ -7,12 +7,4 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- Dark theme -->
-    <style name="DarkTheme" parent="AppTheme">
-        <!-- Customize your theme here. -->
-        <item name="textColor">#ffffff</item>
-        <item name="metaTextColor">#aeaeae</item>
-        <item name="bgColor">#000000</item>
-    </style>
-
 </resources>
