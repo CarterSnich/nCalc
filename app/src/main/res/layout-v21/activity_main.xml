@@ -6,67 +6,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/display_view_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical"
-    >
+        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <HorizontalScrollView
             android:id="@+id/entry_scroll_container"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginHorizontal="10dp"
-            android:scrollbars="none"
-            android:requiresFadingEdge="horizontal"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
             android:fadingEdgeLength="10dp"
-        >
+            android:requiresFadingEdge="horizontal"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toTopOf="@+id/preview_scroll_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/entry_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right|bottom"
-                android:gravity="right"
+                android:layout_gravity="end|bottom"
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="56sp"
-                android:text="0"
+                android:gravity="end"
                 android:scrollHorizontally="true"
-            />
+                android:text="0"
+                android:textSize="56sp" />
         </HorizontalScrollView>
+
         <HorizontalScrollView
             android:id="@+id/preview_scroll_container"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginHorizontal="10dp"
-            android:scrollbars="none"
-            android:requiresFadingEdge="horizontal"
+            android:layout_marginHorizontal="20dp"
             android:fadingEdgeLength="10dp"
-            >
+            android:requiresFadingEdge="horizontal"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/entry_scroll_container">
+
             <TextView
                 android:id="@+id/preview_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="36sp"
-                android:layout_gravity="right|bottom"
-            />
+                android:textSize="36sp" />
         </HorizontalScrollView>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <GridLayout
+        android:id="@+id/gridLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/numpad_background"
         android:columnCount="4"
         android:rowCount="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/display_view_wrapper"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/numpad_background"
-    >
+        app:layout_constraintTop_toBottomOf="@+id/display_view_wrapper">
 
         <!-- ROW 0 -->
         <Button
@@ -80,9 +97,11 @@
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="C"
-            android:textSize="36sp"
+            android:textSize="28sp"
             android:typeface="monospace" />
 
         <Button
@@ -96,9 +115,11 @@
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="±"
-            android:textSize="36sp"
+            android:textSize="28sp"
             android:typeface="monospace" />
 
         <Button
@@ -113,10 +134,12 @@
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
+            android:focusable="true"
             android:fontFamily="sans-serif"
             android:foreground="@drawable/ic_outline_backspace_24"
             android:foregroundGravity="center"
-            android:textSize="36sp"
+            android:gravity="center"
+            android:textSize="28sp"
             android:typeface="monospace" />
 
         <Button
@@ -130,9 +153,11 @@
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="÷"
-            android:textSize="36sp"
+            android:textSize="28sp"
             android:typeface="monospace" />
 
         <!-- ROW 1 -->
@@ -148,9 +173,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="7"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/button8"
@@ -164,9 +191,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="8"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/button9"
@@ -180,9 +209,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="9"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/multiButton"
@@ -196,9 +227,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="×"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <!-- ROW 2 -->
         <Button
@@ -213,9 +246,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="4"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/button5"
@@ -229,9 +264,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="5"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/button6"
@@ -245,9 +282,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="6"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/subtractButton"
@@ -261,9 +300,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="−"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <!-- ROW 3 -->
         <Button
@@ -278,9 +319,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="1"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/button2"
@@ -294,9 +337,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="2"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/button3"
@@ -310,9 +355,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="3"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/addButton"
@@ -326,9 +373,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="+"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <!-- ROW 4 -->
         <Button
@@ -343,9 +392,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="00"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/button0"
@@ -359,9 +410,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="0"
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/decimalButton"
@@ -375,9 +428,11 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="."
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/equalsButton"
@@ -391,8 +446,10 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:fontFamily="@font/poppins"
+            android:gravity="center"
             android:text="="
-            android:textSize="36sp"
-            android:typeface="monospace" />
+            android:textSize="28sp"
+            android:typeface="monospace"
+            android:focusable="true" />
     </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

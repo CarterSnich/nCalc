@@ -2,21 +2,17 @@ package com.darkware.simpcalc;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.SoundEffectConstants;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import android.os.Bundle;
-import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -31,9 +27,8 @@ public class MainActivity extends AppCompatActivity {
     String observableValue;
     String oldValue;
     String newValue;
-    String lastOperation;
-    ArrayList<BigDecimal> nums = new ArrayList<BigDecimal>();
-    ArrayList<String> operations = new ArrayList<String>();
+    ArrayList<BigDecimal> nums = new ArrayList<>();
+    ArrayList<String> operations = new ArrayList<>();
 
     HorizontalScrollView entry_scroll_container;
     HorizontalScrollView preview_scroll_container;
@@ -260,9 +255,10 @@ public class MainActivity extends AppCompatActivity {
 
                 oldValue = entry_textview.getText().toString();
                 if (oldValue.length() > 0) {
-                    entry_textview.setText(
+                    entry_textview.setText(String.format(
+                        "%s",
                         new BigDecimal(oldValue).multiply(new BigDecimal("-1")).toString()
-                    );
+                    ));
                 }
             }
         });
@@ -321,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
         preview_textview.setText("");
 
         for (BigDecimal num : nums) {
-            System.out.println(nums);
+            System.out.println(num);
         }
 
         for (String op : operations) {
