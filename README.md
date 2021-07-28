@@ -26,7 +26,6 @@ Get the app from the [releases page](https://github.com/CarterSnich/nCalc/releas
 
 ## Plan for updates
 
-- App icon ('coz I'm using nHentai logo. yikes)
 - Sci-fi like UI
 - Background
 - Convertions
