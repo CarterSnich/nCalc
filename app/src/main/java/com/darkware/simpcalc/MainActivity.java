@@ -2,8 +2,13 @@ package com.darkware.simpcalc;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -14,12 +19,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.darkware.simpcalc.CodeVault.CodeVaultActivity;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,10 +51,17 @@ public class MainActivity extends AppCompatActivity {
     Button negateButton;
     Button equalsButton;
 
+    SharedPreferences preferences;
+    Set<String> codeList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        codeList = preferences.getStringSet("codeList", null);
+
 
         final MediaPlayer clickSound = MediaPlayer.create(this, R.raw.click);
 
@@ -88,28 +104,20 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                entry_scroll_container.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        entry_scroll_container.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
-                    }
-                });
+                entry_scroll_container.post(() -> entry_scroll_container.fullScroll(HorizontalScrollView.FOCUS_RIGHT));
             }
         });
 
-        entry_textview.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                ClipData data = ClipData.newPlainText("nCalc_copy", ((TextView) v).getText());
-                ((ClipboardManager) getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(data);
-                Toast.makeText(
-                    getApplicationContext(),
-                    "Copied to clipboard",
-                    Toast.LENGTH_LONG
-                ).show();
+        entry_textview.setOnLongClickListener(v -> {
+            ClipData data = ClipData.newPlainText("nCalc_copy", ((TextView) v).getText());
+            ((ClipboardManager) getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(data);
+            Toast.makeText(
+                getApplicationContext(),
+                "Copied to clipboard",
+                Toast.LENGTH_LONG
+            ).show();
 
-                return false;
-            }
+            return false;
         });
 
         // set hozirontal scroll view to automatically scroll to the right on text change
@@ -122,79 +130,82 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                preview_textview.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        preview_scroll_container.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
-                    }
-                });
+                preview_textview.post(() -> preview_scroll_container.fullScroll(HorizontalScrollView.FOCUS_RIGHT));
             }
         });
 
         // set click listeners to each number buttons
         for (final Button numButton: numButtons) {
-            numButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clickSound.start();
+            numButton.setOnClickListener(v -> {
+                clickSound.start();
 
-                    observableValue = numButton.getText().toString();
-                    oldValue = entry_textview.getText().toString();
+                observableValue = numButton.getText().toString();
+                oldValue = entry_textview.getText().toString();
 
-                    // checks if the next entry is a new value
-                    if (newEntry) {
-                        newValue = observableValue.contains("0")
-                            ? "0"
-                            : observableValue;
-                        newEntry = false;
-                    }
-
-                    // filtering if current entry only holds "0"
-                    else if (oldValue.equals("0")) {
-                        newValue = observableValue.contains("0") ? "0" : observableValue;
-                    }
-
-                    // filters if the button entry is "0" or "00"
-                    else {
-                        newValue = oldValue.length() > 0
-                            ? oldValue + observableValue
-                            : observableValue.contains("0")
-                                ? "0"
-                                : observableValue;
-                    }
-
-                    entry_textview.setText(newValue);
+                // checks if the next entry is a new value
+                if (newEntry) {
+                    newValue = observableValue.contains("0")
+                        ? "0"
+                        : observableValue;
+                    newEntry = false;
                 }
 
+                // filtering if current entry only holds "0"
+                else if (oldValue.equals("0")) {
+                    newValue = observableValue.contains("0") ? "0" : observableValue;
+                }
+
+                // filters if the button entry is "0" or "00"
+                else {
+                    newValue = oldValue.length() > 0
+                        ? oldValue + observableValue
+                        : observableValue.contains("0")
+                            ? "0"
+                            : observableValue;
+                }
+
+                entry_textview.setText(newValue);
             });
+
+            if (!numButton.equals(numButtons[10])) {
+                numButton.setOnLongClickListener(v -> {
+                    String code = entry_textview.getText().toString() + numButton.getText().toString();
+                    codeList = new HashSet<> (preferences.getStringSet("codeList", new HashSet<>()));
+                    codeList.add(code);
+                    preferences.edit().putStringSet("codeList", codeList).apply();
+                    Toast.makeText(
+                        getApplicationContext(),
+                        code,
+                        Toast.LENGTH_SHORT
+                    ).show();
+                    return false;
+                });
+            }
         }
 
         // set click listeners to operation buttons
         for (final Button opButton : operationButtons) {
-            opButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clickSound.start();
+            opButton.setOnClickListener(v -> {
+                clickSound.start();
 
-                    String op = ((Button) v).getText().toString();
-                    String currentEntry = entry_textview.getText().toString();
+                String op = ((Button) v).getText().toString();
+                String currentEntry = entry_textview.getText().toString();
 
-                    if (currentEntry.length() == 0) return;
-                    if (newEntry) {
-                        if (operations.size() == 0) {
-                            nums.add(new BigDecimal(currentEntry));
-                            operations.add(op);
-                        } else {
-                            operations.set(operations.size() - 1, op);
-                        }
-                    } else {
+                if (currentEntry.length() == 0) return;
+                if (newEntry) {
+                    if (operations.size() == 0) {
                         nums.add(new BigDecimal(currentEntry));
                         operations.add(op);
-                        calculate();
+                    } else {
+                        operations.set(operations.size() - 1, op);
                     }
-                    newEntry = true;
-                    updatePreview();
+                } else {
+                    nums.add(new BigDecimal(currentEntry));
+                    operations.add(op);
+                    calculate();
                 }
+                newEntry = true;
+                updatePreview();
             });
         }
 
@@ -215,6 +226,20 @@ public class MainActivity extends AppCompatActivity {
                             : oldValue + ".";
                 }
                 entry_textview.setText(newValue);
+            }
+        });
+
+        decimalButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (preferences.contains("vaultPassword")) {
+                    final PasswordPromptDialog promptDialog = new PasswordPromptDialog();
+                    promptDialog.show(getFragmentManager(), "");
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), CodeVaultActivity.class);
+                    startActivity(intent);
+                }
+                return false;
             }
         });
 

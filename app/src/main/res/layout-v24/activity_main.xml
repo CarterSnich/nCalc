@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/parent_wrapper"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:layout_marginBottom="20dp"
     android:background="@color/colorAccent"
+    android:layout_marginBottom="20dp"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,6 +44,7 @@
                 android:gravity="end"
                 android:scrollHorizontally="true"
                 android:text="0"
+                android:textColor="@color/colorPrimary"
                 android:textSize="56sp" />
         </HorizontalScrollView>
 
@@ -65,31 +67,27 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/colorPrimary"
                 android:textSize="36sp" />
         </HorizontalScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <GridLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/gridLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/numpad_background"
-        android:columnCount="4"
-        android:rowCount="5"
+        app:layout_constraintTop_toBottomOf="@id/display_view_wrapper"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/display_view_wrapper">
+        app:layout_constraintEnd_toEndOf="parent"
+        >
 
         <!-- ROW 0 -->
         <Button
             android:id="@+id/clearButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -97,17 +95,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="C"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/button7"
+            app:layout_constraintEnd_toStartOf="@id/negateButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/negateButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -115,37 +114,39 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="±"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/button8"
+            app:layout_constraintEnd_toStartOf="@id/backspaceButton"
+            app:layout_constraintStart_toEndOf="@id/clearButton"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/backspaceButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:layout_columnWeight="1"
-
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/poppins"
             android:foreground="@drawable/ic_outline_backspace_24"
+            android:foregroundTint="@color/colorPrimary"
             android:foregroundGravity="center"
             android:gravity="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/button9"
+            app:layout_constraintEnd_toStartOf="@id/divideButton"
+            app:layout_constraintStart_toEndOf="@id/negateButton"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/divideButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="3"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -153,18 +154,19 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="÷"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/multiButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/backspaceButton"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- ROW 1 -->
         <Button
             android:id="@+id/button7"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -172,17 +174,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="7"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/button4"
+            app:layout_constraintEnd_toStartOf="@id/button8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clearButton" />
 
         <Button
             android:id="@+id/button8"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -190,17 +193,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="8"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/button5"
+            app:layout_constraintEnd_toStartOf="@id/button9"
+            app:layout_constraintStart_toEndOf="@id/button7"
+            app:layout_constraintTop_toBottomOf="@id/negateButton" />
 
         <Button
             android:id="@+id/button9"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -208,17 +212,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="9"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/button6"
+            app:layout_constraintEnd_toStartOf="@id/multiButton"
+            app:layout_constraintStart_toEndOf="@id/button8"
+            app:layout_constraintTop_toBottomOf="@id/backspaceButton" />
 
         <Button
             android:id="@+id/multiButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="3"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -226,18 +231,19 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="×"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/subtractButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button9"
+            app:layout_constraintTop_toBottomOf="@id/divideButton" />
 
         <!-- ROW 2 -->
         <Button
             android:id="@+id/button4"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="2"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -245,17 +251,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="4"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/button1"
+            app:layout_constraintEnd_toStartOf="@id/button5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button7" />
 
         <Button
             android:id="@+id/button5"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="2"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -263,17 +270,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="5"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/button2"
+            app:layout_constraintEnd_toStartOf="@id/button6"
+            app:layout_constraintStart_toEndOf="@id/button4"
+            app:layout_constraintTop_toBottomOf="@id/button8" />
 
         <Button
             android:id="@+id/button6"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="2"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -281,17 +289,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="6"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/button3"
+            app:layout_constraintEnd_toStartOf="@id/subtractButton"
+            app:layout_constraintStart_toEndOf="@id/button5"
+            app:layout_constraintTop_toBottomOf="@id/button9" />
 
         <Button
             android:id="@+id/subtractButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="2"
-            android:layout_rowWeight="1"
-            android:layout_column="3"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -299,18 +308,19 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="−"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/addButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button6"
+            app:layout_constraintTop_toBottomOf="@id/multiButton" />
 
         <!-- ROW 3 -->
         <Button
             android:id="@+id/button1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="3"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -318,17 +328,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="1"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/button00"
+            app:layout_constraintEnd_toStartOf="@id/button2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button4" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="3"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -336,17 +347,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="2"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/button0"
+            app:layout_constraintEnd_toStartOf="@id/button3"
+            app:layout_constraintStart_toEndOf="@id/button1"
+            app:layout_constraintTop_toBottomOf="@id/button5" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="3"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -354,17 +366,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="3"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/decimalButton"
+            app:layout_constraintEnd_toStartOf="@id/addButton"
+            app:layout_constraintStart_toEndOf="@id/button2"
+            app:layout_constraintTop_toBottomOf="@id/button6" />
 
         <Button
             android:id="@+id/addButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="3"
-            android:layout_rowWeight="1"
-            android:layout_column="3"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -372,18 +385,19 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="+"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toTopOf="@id/equalsButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button3"
+            app:layout_constraintTop_toBottomOf="@id/subtractButton" />
 
         <!-- ROW 4 -->
         <Button
             android:id="@+id/button00"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="4"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -391,17 +405,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="00"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button1" />
 
         <Button
             android:id="@+id/button0"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="4"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -409,17 +424,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="0"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/decimalButton"
+            app:layout_constraintStart_toEndOf="@id/button00"
+            app:layout_constraintTop_toBottomOf="@id/button2" />
 
         <Button
             android:id="@+id/decimalButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="4"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -427,17 +443,18 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="."
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/equalsButton"
+            app:layout_constraintStart_toEndOf="@id/button0"
+            app:layout_constraintTop_toBottomOf="@id/button3" />
 
         <Button
             android:id="@+id/equalsButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="4"
-            android:layout_rowWeight="1"
-            android:layout_column="3"
-            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
@@ -445,7 +462,12 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="="
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp"
-            android:typeface="monospace" />
-    </GridLayout>
+            android:typeface="monospace"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/decimalButton"
+            app:layout_constraintTop_toBottomOf="@id/addButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

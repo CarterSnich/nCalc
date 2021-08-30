@@ -1,0 +1,26 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreference
+        app:key="password"
+        app:title="@string/password_title"
+        app:summaryOff="@string/password_off"
+        app:summaryOn="@string/password_on"
+        app:icon="@drawable/ic_baseline_password"
+        />
+
+    <Preference
+        app:key="backup_restore"
+        app:title="@string/backup_restore_title"
+        app:summary="@string/backup_restore_description"
+        app:icon="@drawable/ic_baseline_backup_restore"
+        />
+
+    <Preference
+        app:key="about"
+        app:title="@string/about_title"
+        app:summary="@string/about_description"
+        app:icon="@drawable/ic_baseline_info"
+        app:fragment="com.darkware.simpcalc.VaultSettings.AboutFragment"
+        />
+
+</PreferenceScreen>

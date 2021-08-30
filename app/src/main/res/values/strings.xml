@@ -1,3 +1,45 @@
 <resources>
     <string name="app_name">nCalc</string>
+    <string name="copy">Copy</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="num_0">0</string>
+    <string name="num_C">C</string>
+    <string name="num_neg_sign">±</string>
+    <string name="num_division">÷</string>
+    <string name="num_7">7</string>
+    <string name="num_8">8</string>
+    <string name="num_9">9</string>
+    <string name="num_multiplication">×</string>
+    <string name="num_4">4</string>
+    <string name="num_5">5</string>
+    <string name="num_6">6</string>
+    <string name="num_subtraction">−</string>
+    <string name="num_1">1</string>
+    <string name="num_2">2</string>
+    <string name="num_3">3</string>
+    <string name="num_addition">+</string>
+    <string name="num_00">00</string>
+    <string name="num_decimal">.</string>
+    <string name="num_equal">=</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!--  Password preferences  -->
+    <string name="password_title">Password</string>
+    <string name="password_on">Password set</string>
+    <string name="password_off">No password set</string>
+
+    <!--  Backup and restore preferences  -->
+    <string name="backup_restore_title">Backup and restore</string>
+    <string name="backup_restore_description">Backup and restore code vault</string>
+
+    <!--  About preferences  -->
+    <string name="about_title">About</string>
+    <string name="about_description">About the developer, licenses, and app updates</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="version_title">Version</string>
+    <string name="app_update_title">Check for updates</string>
+    <string name="licenses_title">Open source licenses</string>
+
 </resources>
